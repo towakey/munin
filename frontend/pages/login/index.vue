@@ -10,6 +10,7 @@
 
 <script>
 export default {
+  auth: false,
   data() {
     return {
       email: "",
@@ -17,8 +18,8 @@ export default {
     };
   },
   methods: {
-    login() {
-      console.log("login methods");
+    async login() {
+      console.log("login method");
       this.$axios
         .$post("/api/login", {
           email: this.email,
