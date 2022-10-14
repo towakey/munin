@@ -79,5 +79,21 @@ export default {
     },
   },
   auth: {
+    strategies: {
+      local: {
+        token: {
+          property: "token",
+          global: true,
+        },
+        user: {
+          property: "user",
+        },
+        endpoints: {
+          login: {url: "/api/login", method: "post" },
+          logout: {url: "/api/logout", method: "post" },
+          user: {url: "/api/user", method: "get" },
+        },
+      },
+    },
   },
 }
