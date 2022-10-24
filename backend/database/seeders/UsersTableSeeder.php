@@ -6,6 +6,7 @@ use Illuminate\Database\Seeder;
 
 use Hash;
 use DB;
+use Str;
 use App\Models\User;
 
 class UsersTableSeeder extends Seeder
@@ -20,6 +21,7 @@ class UsersTableSeeder extends Seeder
         //
         $data = [
             [
+                'id' => (string) Str::orderedUuid(),
                 'name' => 'admin',
                 'email' => 'admin@admin.com',
                 'password' => Hash::make('password')
