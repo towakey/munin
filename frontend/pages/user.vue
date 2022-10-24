@@ -1,6 +1,6 @@
 <template>
   <v-card>
-    <v-vard-title class="headline">{{ this.$auth.user.name }}</v-vard-title>
+    <v-card-title class="headline">{{ this.$auth.user.name }}</v-card-title>
   </v-card>
 </template>
 <script>
