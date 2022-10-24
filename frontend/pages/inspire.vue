@@ -5,7 +5,7 @@
         src="/v.png"
         alt="Vuetify.js"
         class="mb-5"
-      >
+      >{{$auth.LoggedIn}}
       <blockquote class="blockquote">
         &#8220;First, solve the problem. Then, write the code.&#8221;
         <footer>
@@ -20,6 +20,7 @@
 
 <script>
 export default {
+  middleware: 'auth',
   name: 'InspirePage'
 }
 </script>

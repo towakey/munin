@@ -10,7 +10,6 @@
 
 <script>
 export default {
-  auth: false,
   data() {
     return {
       form: {
@@ -28,7 +27,7 @@ export default {
         })
         console.log(response);
       } catch (error) {
-        console.log('error:'+error)
+        console.log(error.response.data)
       }
     },
     // async login() {

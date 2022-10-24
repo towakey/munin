@@ -48,7 +48,12 @@
       >
         <v-icon>mdi-minus</v-icon>
       </v-btn>
-      <v-toolbar-title>{{ title }}</v-toolbar-title>
+      <!-- <v-toolbar-title>{{ title }}</v-toolbar-title> -->
+      <v-btn v-if="this.$auth.loggedIn" @click="logout">ログアウト</v-btn>
+      <v-btn v-else to="/login" nuxt>ログイン</v-btn>
+      <v-toolbar-title
+        v-text="this.$auth.loggedIn ? this.$auth.user.name : 'No Login'"
+      />
       <v-spacer />
       <v-btn
         icon
@@ -113,6 +118,15 @@ export default {
       rightDrawer: false,
       title: 'Vuetify.js'
     }
-  }
+  },
+  methods: {
+    async logout()
+    {
+      try{
+        await this.$auth.logout();
+      }
+      catch(e){}
+    },
+  },
 }
 </script>
