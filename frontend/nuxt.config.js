@@ -79,6 +79,10 @@ export default {
     },
   },
   auth: {
+    redirect: {
+      callback: '/timeline',
+      home: '/timeline',
+    },
     strategies: {
       local: {
         token: {
