@@ -17,7 +17,3 @@ use Illuminate\Http\Request;
 Route::get('/', function () {
     return view('welcome');
 });
-
-// SPA認証
-Route::post('/login', 'AuthController@login');
-Route::post('/logout', 'AuthController@logout');
