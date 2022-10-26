@@ -5,6 +5,7 @@ use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\Api\Auth\LoginController;
 use App\Http\Controllers\AuthController;
 use App\Http\Controllers\Api\UserController;
+use App\Http\Controllers\Api\NoteController;
 
 /*
 |--------------------------------------------------------------------------
@@ -29,4 +30,5 @@ Route::post('/logout', [AuthController::class, 'logout']);
 
 Route::group(['middleware' => 'auth:sanctum'], function(){
     Route::get('/user', [UserController::class, 'index']);
+    Route::post('/note/post', [NoteController::class, 'store']);
 });
