@@ -5,6 +5,8 @@ namespace App\Http\Controllers\Api;
 use App\Http\Controllers\Controller;
 use App\Models\Note;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\DB;
 
 class NoteController extends Controller
 {
@@ -16,6 +18,8 @@ class NoteController extends Controller
     public function index()
     {
         //
+        $note=DB::table('notes')->get();
+        return $note;
     }
 
     /**
@@ -31,6 +35,7 @@ class NoteController extends Controller
         $contents=$request->contents;
         $type=$request->type;
         $user_id=$request->user()->id;
+        // $user_id=Auth::id();
         // $user_id=$request->user_id;
 
         // Note::create([
