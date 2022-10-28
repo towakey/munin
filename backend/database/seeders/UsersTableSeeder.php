@@ -26,6 +26,12 @@ class UsersTableSeeder extends Seeder
                 'email' => 'admin@admin.com',
                 'password' => Hash::make('password')
             ],
+            [
+                'id' => (string) Str::orderedUuid(),
+                'name' => 'guest',
+                'email' => 'guest@admin.com',
+                'password' => Hash::make('password')
+            ],
         ];
         DB::table('users')->insert($data);
     }
