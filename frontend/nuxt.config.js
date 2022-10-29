@@ -81,7 +81,7 @@ export default {
   },
   auth: {
     redirect: {
-      callback: '/timeline',
+      callback: '/',
       home: '/timeline',
     },
     strategies: {
