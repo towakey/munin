@@ -18,7 +18,7 @@ class NoteController extends Controller
     public function index()
     {
         //
-        $note=DB::table('notes')->get();
+        $note=DB::table('notes')->latest()->get();
         return $note;
     }
 
