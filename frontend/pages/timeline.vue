@@ -39,7 +39,8 @@
           {{ value.title }}
         </v-card-title>
         <v-card-text>
-          {{ value.contents }}
+          <p>{{ value.contents }}</p>
+          <p>{{ value.user_id }}</p>
         </v-card-text>
       </v-card>
     </v-flex>
@@ -53,7 +54,7 @@ export default {
     return{
       title: "",
       contents: "",
-      type: "",
+      type: 0,
       response: "",
     }
   },
@@ -86,7 +87,7 @@ export default {
             title: this.title,
             contents: this.contents,
             type: this.type,
-            user_id: 'kyos',
+            // user_id: '',
           })
           .then((response)=>{
             console.log(response)
