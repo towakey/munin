@@ -94,8 +94,17 @@ class NoteController extends Controller
      * @param  \App\Models\Note  $note
      * @return \Illuminate\Http\Response
      */
-    public function destroy(Note $note)
+    public function destroy(Request $request, Note $note)
     {
         //
+        $delete_id=$request->delete_id;
+        Note::destroy($delete_id);
+        // if(Note::destroy($delete_id)){
+        //     return response()->json('success', 200);
+        // }
+        // else
+        // {
+        //     return response()->json('create failed', 401);
+        // }
     }
 }

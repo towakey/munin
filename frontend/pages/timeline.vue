@@ -54,7 +54,12 @@
         <v-card-text>
           <p>{{ value.contents }}</p>
           <p>type:{{ value.type }}</p>
+          <p>type:{{ value.id }}</p>
         </v-card-text>
+        <v-card-actions>
+          <v-spacer />
+          <v-btn @click="destroy(value.id)">DELETE</v-btn>
+        </v-card-actions>
       </v-card>
     </v-flex>
   </v-layout>
@@ -111,7 +116,23 @@ export default {
       }catch(error){
         console.log("err:"+error)
       }
-    }
+    },
+    async destroy(id){
+      try{
+        await this.$axios.get("sanctum/csrf-cookie")
+        console.log(id)
+        await this.$axios
+          .$post("/api/note/destroy", {
+            delete_id: id,
+          })
+          .then((response)=>{
+            console.log(response)
+          })
+        this.listGet()
+      }catch(error){
+        console.log("err:"+error)
+      }
+    },
   },
 }
 </script>
