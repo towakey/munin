@@ -35,6 +35,7 @@ class NoteController extends Controller
         $contents=$request->contents;
         $type=$request->type;
         $user_id=$request->user()->id;
+        $secret=$request->secret;
         // $user_id=Auth::id();
         // $user_id=$request->user_id;
 
@@ -51,7 +52,8 @@ class NoteController extends Controller
             'title'=>$title,
             'contents'=>$contents,
             'type'=>$type,
-            'user_id'=>$user_id
+            'secret'=>$secret,
+            'user_id'=>$user_id,
         ]))
         {
             return response()->json('success', 200);

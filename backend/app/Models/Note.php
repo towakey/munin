@@ -13,6 +13,7 @@ class Note extends Model
         'title',
         'contents',
         'type',
+        'secret',
         'user_id',
     ];
     protected $hidden = [

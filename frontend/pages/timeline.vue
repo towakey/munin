@@ -27,6 +27,19 @@
               value="address"
             ></v-radio>
           </v-radio-group>
+          <v-radio-group
+            v-model="secret"
+            row
+          >
+            <v-radio
+              label="一般"
+              value="public"
+            ></v-radio>
+            <v-radio
+              label="機密"
+              value="private"
+            ></v-radio>
+          </v-radio-group>
         </v-card-text>
         <v-card-actions>
           <v-btn @click="listGet">LIST</v-btn>
@@ -55,6 +68,7 @@ export default {
       title: "",
       contents: "",
       type: "note",
+      secret: "public",
       response: "",
     }
   },
@@ -87,6 +101,7 @@ export default {
             title: this.title,
             contents: this.contents,
             type: this.type,
+            secret: this.secret,
             // user_id: '',
           })
           .then((response)=>{
