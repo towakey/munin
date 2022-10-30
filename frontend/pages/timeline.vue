@@ -8,7 +8,8 @@
         <v-card-title>投稿</v-card-title>
         <v-card-text>
           <v-text-field label="タイトル" v-model="title"></v-text-field>
-          <v-text-field label="コンテンツ" v-model="contents"></v-text-field>
+          <v-textarea label="コンテンツ" v-model="contents"></v-textarea>
+          <!-- <v-text-field label="コンテンツ" v-model="contents"></v-text-field> -->
           <!-- <v-text-field label="タイプ" v-model="type"></v-text-field> -->
           <v-radio-group
             v-model="type"
@@ -57,11 +58,30 @@
           <p>type:{{ value.id }}</p>
         </v-card-text>
         <v-card-actions>
+          <v-btn @click="dialog_open(value.id,value.title,value.contents,value.type,value.secret)">UPDATE</v-btn>
           <v-spacer />
           <v-btn @click="destroy(value.id)">DELETE</v-btn>
         </v-card-actions>
       </v-card>
     </v-flex>
+    <v-dialog
+      v-model="dialog"
+    >
+      <v-card>
+        <v-card-title>
+          <v-text-field v-model="update_title"></v-text-field>
+        </v-card-title>
+        <v-card-text>
+          <v-textarea v-model="update_contents"></v-textarea>
+        </v-card-text>
+        <v-card-actions>
+          <v-btn @click="dialog_update">UPDATE</v-btn>
+          <v-spacer />
+          <v-btn @click="dialog_cancel">CANCEL</v-btn>
+        </v-card-actions>
+      </v-card>
+    </v-dialog>
+
   </v-layout>
 </template>
 <script>
@@ -75,6 +95,12 @@ export default {
       type: "note",
       secret: "public",
       response: "",
+      dialog: false,
+      update_id: "",
+      update_title: "",
+      update_contents: "",
+      update_type: "",
+      update_secret: "",
     }
   },
   created(){
@@ -112,6 +138,10 @@ export default {
           .then((response)=>{
             console.log(response)
           })
+        this.title=""
+        this.contents=""
+        this.type="note"
+        this.secret="public"
         this.listGet()
       }catch(error){
         console.log("err:"+error)
@@ -133,6 +163,48 @@ export default {
         console.log("err:"+error)
       }
     },
+    dialog_open(id, title, contents, type, secret){
+      this.dialog=true
+      this.update_id=id
+      this.update_title=title
+      this.update_contents=contents
+      this.update_type=type
+      this.update_secret=secret
+    },
+    dialog_cancel(){
+      this.dialog=false
+      this.update_id=""
+      this.update_title=""
+      this.update_contents=""
+      this.update_type=""
+      this.update_secret=""
+    },
+    async dialog_update(){
+      try{
+        await this.$axios.$get("sanctum/csrf-cookie")
+        await this.$axios
+          .$post("/api/note/update", {
+            id: this.update_id,
+            title: this.update_title,
+            contents: this.update_contents,
+            type: this.update_type,
+            secret: this.update_secret,
+          })
+          .then((response)=>{
+            console.log(response)
+          })
+        this.update_id=""
+        this.update_title=""
+        this.update_contents=""
+        this.update_type=""
+        this.update_secret=""
+        this.dialog=false
+        this.listGet()
+      }catch(error){
+        console.log("err:"+error)
+        this.dialog=false
+      }
+    }
   },
 }
 </script>

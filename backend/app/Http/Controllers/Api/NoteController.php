@@ -86,6 +86,19 @@ class NoteController extends Controller
     public function update(Request $request, Note $note)
     {
         //
+        if(Note::where('id',$request->id)->update([
+            'title'=>$request->title,
+            'contents'=>$request->contents,
+            'type'=>$request->type,
+            'secret'=>$request->secret,
+        ]))
+        {
+            return response()->json('success', 200);
+        }
+        else
+        {
+            return response()->json('create failed', 401);
+        }
     }
 
     /**
@@ -98,13 +111,13 @@ class NoteController extends Controller
     {
         //
         $delete_id=$request->delete_id;
-        Note::destroy($delete_id);
-        // if(Note::destroy($delete_id)){
-        //     return response()->json('success', 200);
-        // }
-        // else
-        // {
-        //     return response()->json('create failed', 401);
-        // }
+        // Note::destroy($delete_id);
+        if(Note::destroy($delete_id)){
+            return response()->json('success', 200);
+        }
+        else
+        {
+            return response()->json('create failed', 401);
+        }
     }
 }
