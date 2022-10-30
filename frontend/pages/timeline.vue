@@ -40,7 +40,7 @@
         </v-card-title>
         <v-card-text>
           <p>{{ value.contents }}</p>
-          <p>{{ value.user_id }}</p>
+          <p>type:{{ value.type }}</p>
         </v-card-text>
       </v-card>
     </v-flex>
@@ -54,7 +54,7 @@ export default {
     return{
       title: "",
       contents: "",
-      type: 0,
+      type: "note",
       response: "",
     }
   },
