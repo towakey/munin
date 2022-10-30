@@ -2,7 +2,7 @@
   <v-row>
     <v-col class="text-center">
       <v-text-field label="email" v-model="form.email"></v-text-field>
-      <v-text-field label="password" v-model="form.password"></v-text-field>
+      <v-text-field label="password" v-model="form.password" type="password"></v-text-field>
       <v-btn @click="login" color="blue" outlined>LOGIN</v-btn>
     </v-col>
   </v-row>
