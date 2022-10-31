@@ -9,7 +9,7 @@ export default {
     titleTemplate: '%s - munin',
     title: 'munin',
     htmlAttrs: {
-      lang: 'en'
+      lang: 'ja'
     },
     meta: [
       { charset: 'utf-8' },
@@ -101,5 +101,8 @@ export default {
         },
       },
     },
+  },
+  router: {
+    base: process.env.BASE_URL
   },
 }
