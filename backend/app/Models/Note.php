@@ -15,6 +15,8 @@ class Note extends Model
         'type',
         'secret',
         'user_id',
+        'node_from',
+        'node_to',
     ];
     protected $hidden = [
     ];

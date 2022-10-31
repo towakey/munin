@@ -36,6 +36,8 @@ class NoteController extends Controller
         $type=$request->type;
         $user_id=$request->user()->id;
         $secret=$request->secret;
+        $node_from=$request->node_from;
+        $node_to=$request->node_to;
         // $user_id=Auth::id();
         // $user_id=$request->user_id;
 
@@ -54,6 +56,8 @@ class NoteController extends Controller
             'type'=>$type,
             'secret'=>$secret,
             'user_id'=>$user_id,
+            'node_from'=>$node_from,
+            'node_to'=>$node_to,
         ]))
         {
             return response()->json('success', 200);
@@ -91,6 +95,8 @@ class NoteController extends Controller
             'contents'=>$request->contents,
             'type'=>$request->type,
             'secret'=>$request->secret,
+            'node_from'=>$request->node_from,
+            'node_to'=>$request->node_to,
         ]))
         {
             return response()->json('success', 200);

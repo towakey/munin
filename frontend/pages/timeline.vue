@@ -58,7 +58,7 @@
           <p>ID:{{ value.id }}</p>
         </v-card-text>
         <v-card-actions>
-          <v-btn @click="dialog_open(value.id,value.title,value.contents,value.type,value.secret)">UPDATE</v-btn>
+          <v-btn @click="dialog_open(value.id,value.title,value.contents,value.type,value.secret,value.node_from,value.node_to)">UPDATE</v-btn>
           <v-spacer />
           <!-- <v-btn @click="destroy(value.id)">DELETE</v-btn> -->
           <v-btn @click="delete_check(value.id)">DELETE</v-btn>
@@ -109,6 +109,8 @@ export default {
       contents: "",
       type: "note",
       secret: "public",
+      node_from: "",
+      node_to: "",
       response: "",
 
       dialog: false,
@@ -119,6 +121,8 @@ export default {
       update_contents: "",
       update_type: "",
       update_secret: "",
+      update_node_from: "",
+      update_node_to: "",
 
       delete_id: "",
     }
@@ -153,6 +157,8 @@ export default {
             contents: this.contents,
             type: this.type,
             secret: this.secret,
+            node_from: this.node_from,
+            node_to: this.node_to,
             // user_id: '',
           })
           .then((response)=>{
@@ -162,6 +168,8 @@ export default {
         this.contents=""
         this.type="note"
         this.secret="public"
+        this.node_from=""
+        this.node_to=""
         this.listGet()
       }catch(error){
         console.log("err:"+error)
@@ -195,13 +203,15 @@ export default {
         console.log("err:"+error)
       }
     },
-    dialog_open(id, title, contents, type, secret){
+    dialog_open(id, title, contents, type, secret, node_from, node_to){
       this.dialog=true
       this.update_id=id
       this.update_title=title
       this.update_contents=contents
       this.update_type=type
       this.update_secret=secret
+      this.update_node_from=node_from
+      this.update_node_to=node_to
     },
     dialog_cancel(){
       this.dialog=false
@@ -210,6 +220,8 @@ export default {
       this.update_contents=""
       this.update_type=""
       this.update_secret=""
+      this.update_node_from=""
+      this.update_node_to=""
     },
     async dialog_update(){
       try{
@@ -221,6 +233,8 @@ export default {
             contents: this.update_contents,
             type: this.update_type,
             secret: this.update_secret,
+            node_from: this.update_node_from,
+            node_to: this.update_node_to,
           })
           .then((response)=>{
             console.log(response)
@@ -230,6 +244,8 @@ export default {
         this.update_contents=""
         this.update_type=""
         this.update_secret=""
+        this.update_node_from=""
+        this.update_node_to=""
         this.dialog=false
         this.listGet()
       }catch(error){

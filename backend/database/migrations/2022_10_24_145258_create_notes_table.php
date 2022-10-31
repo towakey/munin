@@ -20,6 +20,8 @@ class CreateNotesTable extends Migration
             $table->string('type')->nullable(false);
             $table->string('secret')->nullable(false);
             $table->string('user_id');
+            $table->string('node_from')->nullable(true);
+            $table->string('node_to')->nullable(true);
             $table->timestamps();
         });
     }
