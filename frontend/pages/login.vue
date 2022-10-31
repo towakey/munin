@@ -1,11 +1,16 @@
 <template>
-  <v-row>
-    <v-col class="text-center">
+  <v-card>
+    <v-card-title class="justify-center">
+      LOGIN
+    </v-card-title>
+    <v-card-text>
       <v-text-field label="email" v-model="form.email"></v-text-field>
       <v-text-field label="password" v-model="form.password" type="password"></v-text-field>
-      <v-btn @click="login" color="blue" outlined>LOGIN</v-btn>
-    </v-col>
-  </v-row>
+    </v-card-text>
+    <v-card-actions class="justify-center">
+      <v-btn @click="login" color="blue" outlined class="mx-auto">LOGIN</v-btn>
+    </v-card-actions>
+  </v-card>
 </template>
 
 <script>
@@ -20,7 +25,7 @@ export default {
   },
   methods: {
     async login() {
-      console.log("login method");
+      // console.log("login method");
       try{
         let response = await this.$auth.loginWith('local', {
           data: this.form
