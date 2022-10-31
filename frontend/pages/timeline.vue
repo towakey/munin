@@ -7,8 +7,8 @@
       <v-card>
         <v-card-title>投稿</v-card-title>
         <v-card-text>
-          <v-text-field label="タイトル" v-model="title"></v-text-field>
-          <v-textarea label="コンテンツ" v-model="contents"></v-textarea>
+          <v-text-field label="TITLE" v-model="title"></v-text-field>
+          <v-textarea label="CONTENTS" v-model="contents"></v-textarea>
           <!-- <v-text-field label="コンテンツ" v-model="contents"></v-text-field> -->
           <!-- <v-text-field label="タイプ" v-model="type"></v-text-field> -->
           <v-radio-group
@@ -54,16 +54,31 @@
         </v-card-title>
         <v-card-text>
           <p>{{ value.contents }}</p>
-          <p>type:{{ value.type }}</p>
-          <p>type:{{ value.id }}</p>
+          <p>TYPE:{{ value.type }}</p>
+          <p>ID:{{ value.id }}</p>
         </v-card-text>
         <v-card-actions>
           <v-btn @click="dialog_open(value.id,value.title,value.contents,value.type,value.secret)">UPDATE</v-btn>
           <v-spacer />
-          <v-btn @click="destroy(value.id)">DELETE</v-btn>
+          <!-- <v-btn @click="destroy(value.id)">DELETE</v-btn> -->
+          <v-btn @click="delete_check(value.id)">DELETE</v-btn>
         </v-card-actions>
       </v-card>
     </v-flex>
+    <v-dialog
+      v-model="delete_dialog"
+    >
+      <v-card>
+        <v-card-title>削除しますか？</v-card-title>
+        <v-card-text>
+        </v-card-text>
+        <v-card-actions>
+          <v-btn @click="delete_yes">YES</v-btn>
+          <v-spacer />
+          <v-btn @click="delete_no">NO</v-btn>
+        </v-card-actions>
+      </v-card>
+    </v-dialog>
     <v-dialog
       v-model="dialog"
     >
@@ -95,12 +110,17 @@ export default {
       type: "note",
       secret: "public",
       response: "",
+
       dialog: false,
+      delete_dialog: false,
+
       update_id: "",
       update_title: "",
       update_contents: "",
       update_type: "",
       update_secret: "",
+
+      delete_id: "",
     }
   },
   created(){
@@ -146,6 +166,18 @@ export default {
       }catch(error){
         console.log("err:"+error)
       }
+    },
+    delete_check(id){
+      this.delete_id=id
+      this.delete_dialog=true
+    },
+    delete_no(){
+      this.delete_dialog=false
+    },
+    delete_yes(){
+      this.destroy(this.delete_id)
+      this.delete_id=""
+      this.delete_dialog=false
     },
     async destroy(id){
       try{
