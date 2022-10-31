@@ -35,8 +35,8 @@
         v-text="this.$auth.loggedIn ? this.$auth.user.name : 'munin system'"
       />
       <v-spacer />
-      <v-btn v-if="this.$auth.loggedIn" @click="logout">ログアウト</v-btn>
-      <v-btn v-else to="/login" nuxt>ログイン</v-btn>
+      <v-btn v-if="this.$auth.loggedIn" @click="logout">LOGOUT</v-btn>
+      <v-btn v-else to="/login" nuxt>LOGIN</v-btn>
     </v-app-bar>
     <v-main>
       <v-container>
