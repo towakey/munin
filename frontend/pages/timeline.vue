@@ -4,7 +4,10 @@
     justify-center
   >
     <v-flex>
-      <v-card>
+      <v-card
+        outlined
+        style="border-width: 1px;border-color: #FF6F00"
+      >
         <v-card-title>投稿</v-card-title>
         <v-card-text>
           <v-text-field label="TITLE" v-model="title"></v-text-field>
@@ -43,26 +46,46 @@
           </v-radio-group>
         </v-card-text>
         <v-card-actions>
-          <v-btn @click="listGet">LIST</v-btn>
+          <v-btn
+            @click="listGet"
+            outlined
+          >LIST</v-btn>
           <v-spacer />
-          <v-btn @click="submit">SUBMIT</v-btn>
+          <v-btn
+            @click="submit"
+            outlined
+          >SUBMIT</v-btn>
         </v-card-actions>
       </v-card>
-      <v-card v-for="value in this.response" :key="value.id">
+      <v-card
+        v-for="value in this.response"
+        :key="value.id"
+        outlined
+        elevation="0"
+        style="border-width: 1px;border-color: #FF6F00"
+      >
         <v-card-title class="headline">
           {{ value.title }}
         </v-card-title>
+        <v-card-subtitle>TYPE:{{ value.type }} ID:{{ value.id }}</v-card-subtitle>
         <v-card-text>
           <div v-html='$md.render(String(value.contents))'></div>
           <!-- <p>{{ value.contents }}</p> -->
-          <p>TYPE:{{ value.type }}</p>
-          <p>ID:{{ value.id }}</p>
+          <!-- <p>TYPE:{{ value.type }}</p>
+          <p>ID:{{ value.id }}</p> -->
         </v-card-text>
         <v-card-actions>
-          <v-btn @click="dialog_open(value.id,value.title,value.contents,value.type,value.secret,value.node_from,value.node_to)">UPDATE</v-btn>
+          <v-btn
+            @click="dialog_open(value.id,value.title,value.contents,value.type,value.secret,value.node_from,value.node_to)"
+            outlined
+          >UPDATE</v-btn>
           <v-spacer />
           <!-- <v-btn @click="destroy(value.id)">DELETE</v-btn> -->
-          <v-btn @click="delete_check(value.id)">DELETE</v-btn>
+          <v-btn
+            @click="delete_check(value.id)"
+            outlined
+            color="red"
+          >DELETE</v-btn>
         </v-card-actions>
       </v-card>
     </v-flex>
@@ -74,9 +97,15 @@
         <v-card-text>
         </v-card-text>
         <v-card-actions>
-          <v-btn @click="delete_yes">YES</v-btn>
+          <v-btn
+            @click="delete_yes"
+            outlined
+          >YES</v-btn>
           <v-spacer />
-          <v-btn @click="delete_no">NO</v-btn>
+          <v-btn
+            @click="delete_no"
+            outlined
+          >NO</v-btn>
         </v-card-actions>
       </v-card>
     </v-dialog>
@@ -91,9 +120,15 @@
           <v-textarea v-model="update_contents"></v-textarea>
         </v-card-text>
         <v-card-actions>
-          <v-btn @click="dialog_update">UPDATE</v-btn>
+          <v-btn
+            @click="dialog_update"
+            outlined
+          >UPDATE</v-btn>
           <v-spacer />
-          <v-btn @click="dialog_cancel">CANCEL</v-btn>
+          <v-btn
+            @click="dialog_cancel"
+            outlined
+          >CANCEL</v-btn>
         </v-card-actions>
       </v-card>
     </v-dialog>
