@@ -44,6 +44,7 @@ export default {
     // https://go.nuxtjs.dev/axios
     '@nuxtjs/axios',
     '@nuxtjs/auth-next',
+    '@nuxtjs/markdownit',
   ],
 
   // Axios module configuration: https://go.nuxtjs.dev/config-axios
@@ -104,5 +105,8 @@ export default {
   },
   router: {
     base: process.env.BASE_URL
+  },
+  markdownit: {
+    injected: true,
   },
 }

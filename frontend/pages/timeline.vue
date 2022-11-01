@@ -53,7 +53,8 @@
           {{ value.title }}
         </v-card-title>
         <v-card-text>
-          <p>{{ value.contents }}</p>
+          <div v-html='$md.render(String(value.contents))'></div>
+          <!-- <p>{{ value.contents }}</p> -->
           <p>TYPE:{{ value.type }}</p>
           <p>ID:{{ value.id }}</p>
         </v-card-text>
