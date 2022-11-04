@@ -6,6 +6,7 @@
       :clipped="clipped"
       fixed
       app
+      style="background-color: rgba(191, 54, 12, .9);border-width: 1px;border-color: #FF6F00"
     >
       <v-list>
         <v-list-item
@@ -28,6 +29,7 @@
       :clipped-left="clipped"
       fixed
       app
+      style="background-color: rgba(191, 54, 12, .7)"
     >
       <v-app-bar-nav-icon @click.stop="drawer = !drawer" />
       <!-- <v-toolbar-title>{{ title }}</v-toolbar-title> -->
@@ -35,8 +37,18 @@
         v-text="this.$auth.loggedIn ? this.$auth.user.name : 'munin system'"
       />
       <v-spacer />
-      <v-btn v-if="this.$auth.loggedIn" @click="logout">LOGOUT</v-btn>
-      <v-btn v-else to="/login" nuxt>LOGIN</v-btn>
+      <v-btn
+        v-if="this.$auth.loggedIn"
+        @click="logout"
+        outlined
+        style="background-color: rgba(191, 54, 12, .7);border-width: 1px;border-color: #FF6F00"
+      >LOGOUT</v-btn>
+      <v-btn
+        v-else to="/login"
+        nuxt
+        outlined
+        style="background-color: rgba(191, 54, 12, .7);border-width: 1px;border-color: #FF6F00"
+      >LOGIN</v-btn>
     </v-app-bar>
     <v-main>
       <v-container>
@@ -63,6 +75,7 @@
     <v-footer
       :absolute="!fixed"
       app
+      style="background-color: rgba(191, 54, 12, .7)"
     >
       <span>&copy; {{ new Date().getFullYear() }}</span>
     </v-footer>

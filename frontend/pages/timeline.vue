@@ -6,7 +6,7 @@
     <v-flex>
       <v-card
         outlined
-        style="border-width: 1px;border-color: #FF6F00"
+        style="background-color: rgba(191, 54, 12, .3);border-width: 1px;border-color: #FF6F00"
       >
         <v-card-title>投稿</v-card-title>
         <v-card-text>
@@ -49,11 +49,13 @@
           <v-btn
             @click="listGet"
             outlined
+            style="background-color: rgba(191, 54, 12, .7);border-width: 1px;border-color: #FF6F00"
           >LIST</v-btn>
           <v-spacer />
           <v-btn
             @click="submit"
             outlined
+            style="background-color: rgba(191, 54, 12, .7);border-width: 1px;border-color: #FF6F00"
           >SUBMIT</v-btn>
         </v-card-actions>
       </v-card>
@@ -62,7 +64,7 @@
         :key="value.id"
         outlined
         elevation="0"
-        style="border-width: 1px;border-color: #FF6F00"
+        style="background-color: rgba(191, 54, 12, .3);border-width: 1px;border-color: #FF6F00"
       >
         <v-card-title class="headline">
           {{ value.title }}
@@ -78,6 +80,7 @@
           <v-btn
             @click="dialog_open(value.id,value.title,value.contents,value.type,value.secret,value.node_from,value.node_to)"
             outlined
+            style="background-color: rgba(191, 54, 12, .7);border-width: 1px;border-color: #FF6F00"
           >UPDATE</v-btn>
           <v-spacer />
           <!-- <v-btn @click="destroy(value.id)">DELETE</v-btn> -->
@@ -92,7 +95,10 @@
     <v-dialog
       v-model="delete_dialog"
     >
-      <v-card>
+      <v-card
+        outlined
+        style="background-color: rgba(191, 54, 12, .9);border-width: 1px;border-color: #FF6F00"
+      >
         <v-card-title>削除しますか？</v-card-title>
         <v-card-text>
         </v-card-text>
@@ -112,12 +118,15 @@
     <v-dialog
       v-model="dialog"
     >
-      <v-card>
+      <v-card
+        outlined
+        style="background-color: rgba(191, 54, 12, .9);border-width: 1px;border-color: #FF6F00"
+      >
         <v-card-title>
-          <v-text-field v-model="update_title"></v-text-field>
+          <v-text-field label="TITLE" v-model="update_title"></v-text-field>
         </v-card-title>
         <v-card-text>
-          <v-textarea v-model="update_contents"></v-textarea>
+          <v-textarea label="CONTENTS" v-model="update_contents"></v-textarea>
         </v-card-text>
         <v-card-actions>
           <v-btn

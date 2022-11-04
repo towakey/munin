@@ -1,5 +1,7 @@
 <template>
-  <v-card>
+  <v-card
+    outlined
+    style="background-color: rgba(191, 54, 12, .3);border-width: 1px;border-color: #FF6F00">
     <v-card-title class="justify-center">
       LOGIN
     </v-card-title>
@@ -8,7 +10,12 @@
       <v-text-field label="password" v-model="form.password" type="password"></v-text-field>
     </v-card-text>
     <v-card-actions class="justify-center">
-      <v-btn @click="login" color="blue" outlined class="mx-auto">LOGIN</v-btn>
+      <v-btn
+        @click="login"
+        outlined
+        class="mx-auto black--text"
+        style="background-color: rgba(191, 54, 12, .7);border-width: 1px;border-color: #FF6F00"
+      >LOGIN</v-btn>
     </v-card-actions>
   </v-card>
 </template>
