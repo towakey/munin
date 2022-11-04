@@ -1,7 +1,8 @@
 <template>
   <v-card
     outlined
-    style="background-color: rgba(191, 54, 12, .3);border-width: 1px;border-color: #FF6F00">
+    style="background-color: rgba(191, 54, 12, .3);border-width: 1px;border-color: #FF6F00"
+  >
     <v-card-title class="justify-center">
       LOGIN
     </v-card-title>

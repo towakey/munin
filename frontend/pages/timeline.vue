@@ -69,7 +69,16 @@
         <v-card-title class="headline">
           {{ value.title }}
         </v-card-title>
-        <v-card-subtitle>TYPE:{{ value.type }} ID:{{ value.id }}</v-card-subtitle>
+        <v-card-subtitle>
+          <v-chip
+            outlined
+            style="border-width: 1px;border-color: #FF6F00"
+          >{{ value.type }}</v-chip>
+          <v-chip
+            outlined
+            style="border-width: 1px;border-color: #FF6F00"
+          >{{ value.id }}</v-chip>
+        </v-card-subtitle>
         <v-card-text>
           <div v-html='$md.render(String(value.contents))'></div>
           <!-- <p>{{ value.contents }}</p> -->
