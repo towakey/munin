@@ -6,7 +6,7 @@
     "dev": "cross-env NODE_ENV=development nuxt",
     "build": "nuxt build",
     "start": "nuxt start",
-    "generate:prod": "cross-env NODE_ENV=\"production\" nuxt generate"
+    "generate:prod": "cross-env NODE_ENV=production nuxt generate"
   },
   "dependencies": {
     "@nuxtjs/auth-next": "5.0.0-1648802546.c9880dc",

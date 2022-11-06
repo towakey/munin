@@ -1,6 +1,9 @@
 import colors from 'vuetify/es5/util/colors'
+const environment = process.env.NODE_ENV || 'development'
+const envSettings = require(`./env.${environment}.js`)
 
 export default {
+  env: envSettings,
   // Target: https://go.nuxtjs.dev/config-target
   target: 'static',
 
@@ -77,7 +80,7 @@ export default {
   },
   publicRuntimeConfig: {
     axios: {
-      baseURL: process.env.API_BASE_URL,
+      baseURL: envSettings.API_URL,
     },
   },
   auth: {
@@ -104,7 +107,7 @@ export default {
     },
   },
   router: {
-    base: process.env.BASE_URL
+    base: envSettings.BASE_URL
   },
   markdownit: {
     injected: true,
