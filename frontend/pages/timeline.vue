@@ -4,61 +4,75 @@
     justify-center
   >
     <v-flex>
-      <v-card
-        outlined
-        style="background-color: rgba(191, 54, 12, .3);border-width: 1px;border-color: #FF6F00"
-      >
-        <v-card-title>投稿</v-card-title>
-        <v-card-text>
-          <v-text-field label="TITLE" v-model="title"></v-text-field>
-          <v-textarea label="CONTENTS" v-model="contents"></v-textarea>
-          <!-- <v-text-field label="コンテンツ" v-model="contents"></v-text-field> -->
-          <!-- <v-text-field label="タイプ" v-model="type"></v-text-field> -->
-          <v-radio-group
-            v-model="type"
-            row
+      <v-expansion-panels>
+        <v-expansion-panel
+          style="background-color: rgba(191, 54, 12, .3);border-width: 1px;border-color: #FF6F00"
+        >
+          <v-expansion-panel-header
+          outlined
+          style="background-color: rgba(191, 54, 12, .3)"
           >
-            <v-radio
-              label="note"
-              value="note"
-            ></v-radio>
-            <v-radio
-              label="memo"
-              value="memo"
-            ></v-radio>
-            <v-radio
-              label="address"
-              value="address"
-            ></v-radio>
-          </v-radio-group>
-          <v-radio-group
-            v-model="secret"
-            row
-          >
-            <v-radio
-              label="一般"
-              value="public"
-            ></v-radio>
-            <v-radio
-              label="機密"
-              value="private"
-            ></v-radio>
-          </v-radio-group>
-        </v-card-text>
-        <v-card-actions>
-          <v-btn
-            @click="listGet"
-            outlined
-            style="background-color: rgba(191, 54, 12, .7);border-width: 1px;border-color: #FF6F00"
-          >LIST</v-btn>
-          <v-spacer />
-          <v-btn
-            @click="submit"
-            outlined
-            style="background-color: rgba(191, 54, 12, .7);border-width: 1px;border-color: #FF6F00"
-          >SUBMIT</v-btn>
-        </v-card-actions>
-      </v-card>
+            投稿する
+          </v-expansion-panel-header>
+          <v-expansion-panel-content>
+            <v-card
+              outlined
+              style="background-color: rgba(191, 54, 12, .3);border-width: 1px;border-color: #FF6F00"
+            >
+              <!-- <v-card-title>投稿</v-card-title> -->
+              <v-card-text>
+                <v-text-field label="TITLE" v-model="title"></v-text-field>
+                <v-textarea label="CONTENTS" v-model="contents"></v-textarea>
+                <!-- <v-text-field label="コンテンツ" v-model="contents"></v-text-field> -->
+                <!-- <v-text-field label="タイプ" v-model="type"></v-text-field> -->
+                <v-radio-group
+                  v-model="type"
+                  row
+                >
+                  <v-radio
+                    label="note"
+                    value="note"
+                  ></v-radio>
+                  <v-radio
+                    label="memo"
+                    value="memo"
+                  ></v-radio>
+                  <v-radio
+                    label="address"
+                    value="address"
+                  ></v-radio>
+                </v-radio-group>
+                <v-radio-group
+                  v-model="secret"
+                  row
+                >
+                  <v-radio
+                    label="一般"
+                    value="public"
+                  ></v-radio>
+                  <v-radio
+                    label="機密"
+                    value="private"
+                  ></v-radio>
+                </v-radio-group>
+              </v-card-text>
+              <v-card-actions>
+                <v-btn
+                  @click="listGet"
+                  outlined
+                  style="background-color: rgba(191, 54, 12, .7);border-width: 1px;border-color: #FF6F00"
+                >LIST</v-btn>
+                <v-spacer />
+                <v-btn
+                  @click="submit"
+                  outlined
+                  style="background-color: rgba(191, 54, 12, .7);border-width: 1px;border-color: #FF6F00"
+                >SUBMIT</v-btn>
+              </v-card-actions>
+            </v-card>
+          </v-expansion-panel-content>
+        </v-expansion-panel>
+      </v-expansion-panels>
       <v-card
         v-for="value in this.response"
         :key="value.id"
