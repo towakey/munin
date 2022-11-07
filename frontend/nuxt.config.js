@@ -111,5 +111,16 @@ export default {
   },
   markdownit: {
     injected: true,
+    use: [
+      [
+        'markdown-it-link-attributes',
+        {
+          attrs:{
+            target: '_blank',
+            rel: 'noopener',
+          }
+        }
+      ]
+    ]
   },
 }
