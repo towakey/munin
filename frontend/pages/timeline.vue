@@ -4,7 +4,7 @@
     justify-center
   >
     <v-flex>
-      <v-expansion-panels>
+      <v-expansion-panels style="padding-bottom: 5px">
         <v-expansion-panel
           style="background-color: rgba(191, 54, 12, .3);border-width: 1px;border-color: #FF6F00"
         >
@@ -14,7 +14,9 @@
           >
             投稿する
           </v-expansion-panel-header>
-          <v-expansion-panel-content>
+          <v-expansion-panel-content
+            style="padding-top:10px"
+          >
             <v-card
               outlined
               style="background-color: rgba(191, 54, 12, .3);border-width: 1px;border-color: #FF6F00"
@@ -62,6 +64,11 @@
                   outlined
                   style="background-color: rgba(191, 54, 12, .7);border-width: 1px;border-color: #FF6F00"
                 >LIST</v-btn>
+                <v-btn
+                  @click="dialog_secret"
+                  outlined
+                  style="background-color: rgba(191, 54, 12, .7);border-width: 1px;border-color: #FF6F00"
+                >SECRET</v-btn>
                 <v-spacer />
                 <v-btn
                   @click="submit"
@@ -92,6 +99,10 @@
             outlined
             style="border-width: 1px;border-color: #FF6F00"
           >{{ value.id }}</v-chip>
+          <v-chip
+            outlined
+            style="border-width: 1px;border-color: #FF6F00"
+          >{{ value.secret }}</v-chip>
         </v-card-subtitle>
         <v-card-text>
           <div v-html='$md.render(String(value.contents))'></div>
@@ -164,7 +175,29 @@
         </v-card-actions>
       </v-card>
     </v-dialog>
-
+    <v-dialog
+      v-model="secret_dialog"
+    >
+      <v-card
+        outlined
+        style="background-color: rgba(191, 54, 12, .9);border-width: 1px;border-color: #FF6F00"
+      >
+        <v-card-title>
+          Please Enter Password
+        </v-card-title>
+        <v-card-text>
+          <v-text-field label="" v-model="secret_password" type="password"></v-text-field>
+        </v-card-text>
+        <v-card-actions class="justify-center">
+          <v-btn
+            @click="listGetSecret"
+            outlined
+            class="mx-auto"
+          >ENTER</v-btn>
+          <v-spacer />
+        </v-card-actions>
+      </v-card>
+    </v-dialog>
   </v-layout>
 </template>
 <script>
@@ -183,6 +216,7 @@ export default {
 
       dialog: false,
       delete_dialog: false,
+      secret_dialog: false,
 
       update_id: "",
       update_title: "",
@@ -193,6 +227,8 @@ export default {
       update_node_to: "",
 
       delete_id: "",
+
+      secret_password: "",
     }
   },
   created(){
@@ -320,7 +356,28 @@ export default {
         console.log("err:"+error)
         this.dialog=false
       }
-    }
+    },
+    dialog_secret(){
+      this.secret_dialog=true
+    },
+    async listGetSecret(){
+      try{
+        await this.$axios.get("sanctum/csrf-cookie")
+        await this.$axios
+          .post("/api/note/secret",{
+            password: this.secret_password,
+          })
+          .then((response)=>{
+            this.response=response.data
+          })
+          console.log(this.response)
+      }catch(error){
+        this.response=""
+        console.log("listGetSecret:"+error)
+      }
+      this.secret_password=""
+      this.secret_dialog=false
+    },
   },
 }
 </script>

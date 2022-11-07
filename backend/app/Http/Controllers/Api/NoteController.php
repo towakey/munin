@@ -4,9 +4,13 @@ namespace App\Http\Controllers\Api;
 
 use App\Http\Controllers\Controller;
 use App\Models\Note;
+use App\Models\User;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\DB;
+use Illuminate\Support\Facades\Log;
+
+use Hash;
 
 class NoteController extends Controller
 {
@@ -18,8 +22,29 @@ class NoteController extends Controller
     public function index()
     {
         //
-        $note=DB::table('notes')->where("user_id",Auth::id())->latest()->get();
+        $note=DB::table('notes')->where([
+            ["user_id",Auth::id()],
+            ["secret","public"]
+        ])->latest()->get();
         return $note;
+    }
+
+    public function secret(Request $request)
+    {
+        //
+        $user = User::where('id',Auth::id())->first();
+        if (!$user || !Hash::check($request->password, $user->password)) {
+            // Log::info("false");
+            return response()->json(['message' => "message"], 401);
+        }else{
+            $note=DB::table('notes')->where([
+                ["user_id",Auth::id()],
+                ["secret","private"]
+            ])->latest()->get();
+            // Log::info("true");
+            return $note;
+        }
+
     }
 
     /**
