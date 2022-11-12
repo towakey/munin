@@ -59,22 +59,67 @@
                 </v-radio-group>
               </v-card-text>
               <v-card-actions>
-                <v-btn
-                  @click="listGet"
-                  outlined
-                  style="background-color: rgba(191, 54, 12, .7);border-width: 1px;border-color: #FF6F00"
-                >LIST</v-btn>
-                <v-btn
-                  @click="dialog_secret"
-                  outlined
-                  style="background-color: rgba(191, 54, 12, .7);border-width: 1px;border-color: #FF6F00"
-                >SECRET</v-btn>
                 <v-spacer />
                 <v-btn
                   @click="submit"
                   outlined
                   style="background-color: rgba(191, 54, 12, .7);border-width: 1px;border-color: #FF6F00"
                 >SUBMIT</v-btn>
+              </v-card-actions>
+            </v-card>
+          </v-expansion-panel-content>
+        </v-expansion-panel>
+      </v-expansion-panels>
+      <v-expansion-panels style="padding-bottom: 5px">
+        <v-expansion-panel
+          style="background-color: rgba(191, 54, 12, .3);border-width: 1px;border-color: #FF6F00"
+        >
+          <v-expansion-panel-header
+          outlined
+          style="background-color: rgba(191, 54, 12, .3)"
+          >
+          検索オプション
+          </v-expansion-panel-header>
+          <v-expansion-panel-content
+            style="padding-top:10px"
+          >
+            <v-card>
+              <v-card-title>
+              </v-card-title>
+              <v-card-text
+                class="d-flex"
+              >
+                <v-checkbox
+                  v-model="selectType"
+                  label="note"
+                  value="note"
+                >
+                </v-checkbox>
+                <v-checkbox
+                  v-model="selectType"
+                  label="memo"
+                  value="memo"
+                >
+                </v-checkbox>
+                <v-checkbox
+                  v-model="selectType"
+                  label="address"
+                  value="address"
+                >
+                </v-checkbox>
+              </v-card-text>
+              <v-card-actions>
+                <v-btn
+                  @click="listGet"
+                  outlined
+                  style="background-color: rgba(191, 54, 12, .7);border-width: 1px;border-color: #FF6F00"
+                >LIST</v-btn>
+                <v-spacer />
+                <v-btn
+                  @click="dialog_secret"
+                  outlined
+                  style="background-color: rgba(191, 54, 12, .7);border-width: 1px;border-color: #FF6F00"
+                >SECRET</v-btn>
               </v-card-actions>
             </v-card>
           </v-expansion-panel-content>
@@ -155,6 +200,7 @@
       <v-card
         outlined
         style="background-color: rgba(191, 54, 12, .9);border-width: 1px;border-color: #FF6F00"
+        class=".col-9"
       >
         <v-card-title>
           <v-text-field label="TITLE" v-model="update_title"></v-text-field>
@@ -212,7 +258,9 @@ export default {
       secret: "public",
       node_from: "",
       node_to: "",
+
       response: "",
+      selectType: ["note", "memo", "address"],
 
       dialog: false,
       delete_dialog: false,
@@ -243,7 +291,9 @@ export default {
       try{
         await this.$axios.get("sanctum/csrf-cookie")
         await this.$axios
-          .get("/api/note")
+          .post("/api/note", {
+            selectType: this.selectType
+          })
           .then((response)=>{
             this.response=response.data
           })

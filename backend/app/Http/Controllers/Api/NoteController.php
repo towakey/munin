@@ -19,13 +19,27 @@ class NoteController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function index()
+    public function index(Request $request)
     {
         //
-        $note=DB::table('notes')->where([
-            ["user_id",Auth::id()],
-            ["secret","public"]
-        ])->latest()->get();
+        $whereArray[]=["user_id",Auth::id()];
+        $whereArray[]=["secret","public"];
+        // Log::info($request->selectType);
+        // $note=DB::table('notes')->where([
+        //     ["user_id",Auth::id()],
+        //     ["secret","public"]
+        // ])->latest()->get();
+        if(count($request->selectType)===0){
+            // $note=DB::table('notes')->where($whereArray)->orwhere('type','note')->latest()->get();
+            $note=null;
+        }else{
+            $note=DB::table('notes')->where($whereArray)->Where(function($query) use ($request){
+                $query->where('type',$request->selectType[0]);
+                for($i=1;$i<count($request->selectType);$i++){
+                    $query->orWhere('type',$request->selectType[$i]);
+                }
+            })->latest()->get();
+        }
         return $note;
     }
 
