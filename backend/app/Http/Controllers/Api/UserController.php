@@ -15,4 +15,19 @@ class UserController extends Controller
         $user = $request->user();
         return response()->json(compact('user'), 200);
     }
+
+    public function update(Request $request, User $user)
+    {
+        if(User::where('id',$request->id)->update([
+            'name'=>$request->name,
+            'email'=>$request->email,
+        ]))
+        {
+            return response()->json('success', 200);
+        }
+        else
+        {
+            return response()->json('create failed', 401);
+        }
+    }
 }

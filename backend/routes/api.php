@@ -30,6 +30,7 @@ Route::post('/logout', [AuthController::class, 'logout']);
 
 Route::group(['middleware' => 'auth:sanctum'], function(){
     Route::get('/user', [UserController::class, 'index']);
+    Route::post('/user/update', [UserController::class, 'update']);
     Route::post('/note', [NoteController::class, 'index']);
     Route::post('/note/post', [NoteController::class, 'store']);
     Route::post('/note/update', [NoteController::class, 'update']);
