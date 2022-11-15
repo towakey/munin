@@ -61,6 +61,11 @@ class NoteController extends Controller
 
     }
 
+    public function getItem(Request $request)
+    {
+        return Note::where('id', $request->id)->first();
+    }
+
     /**
      * Store a newly created resource in storage.
      *

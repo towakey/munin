@@ -8,6 +8,10 @@ use Illuminate\Support\Str;
 
 class Note extends Model
 {
+    protected $primaryKey = 'id';
+    public $incrementing = false;
+    protected $keyType = 'string';
+
     use HasFactory;
     protected $fillable = [
         'title',

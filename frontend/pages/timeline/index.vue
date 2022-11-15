@@ -96,6 +96,12 @@
             outlined
             style="background-color: rgba(191, 54, 12, .7);border-width: 1px;border-color: #FF6F00"
           >UPDATE</v-btn>
+          <v-btn
+            @click="moveView(value.id)"
+            outlined
+            style="background-color: rgba(191, 54, 12, .7);border-width: 1px;border-color: #FF6F00"
+            nuxt
+          >VIEW</v-btn>
           <v-spacer />
           <!-- <v-btn @click="destroy(value.id)">DELETE</v-btn> -->
           <v-btn
@@ -215,6 +221,10 @@ export default {
     this.listGet()
   },
   methods: {
+    moveView(id){
+      console.log(id)
+      this.$router.push({path: 'timeline/view', query: {id: id}})
+    },
     async listGet(){
       try{
         await this.$axios.get("sanctum/csrf-cookie")

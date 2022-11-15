@@ -36,4 +36,5 @@ Route::group(['middleware' => 'auth:sanctum'], function(){
     Route::post('/note/update', [NoteController::class, 'update']);
     Route::post('/note/destroy', [NoteController::class, 'destroy']);
     Route::post('/note/secret', [NoteController::class, 'secret']);
+    Route::post('/note/getItem', [NoteController::class, 'getItem']);
 });
